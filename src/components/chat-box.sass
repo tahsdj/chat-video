@@ -118,6 +118,17 @@
 	max-width: 500px
 	padding: 10px 20px
 	z-index: 1
+	overflow-y: auto
+	overflow-x: hidden
+
+	&::-webkit-scrollbar-track
+		border-radius: 2px
+	&::-webkit-scrollbar
+		width: 3px
+		background-color: rgba(200,200,200,0)
+	&::-webkit-scrollbar-thumb
+		border-radius: 2px
+		background-color: rgba(180,180,180,0.2)
 
 	.video-option
 		display: inline-flex
