@@ -2,3 +2,4 @@ node_modules/
 firebase.json
 package-lock.json
 src/api/constant.js
+firebase-debug.log
