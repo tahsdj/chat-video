@@ -2,7 +2,7 @@ import React from 'react'
 import './input-box.sass'
 import {connect} from 'react-redux'
 import {handleInputContent} from 'states/actions/message.js'
-import {getVideo} from 'states/actions/video.js'
+import {getVideo, adjustVideoScale} from 'states/actions/video.js'
 
 const InputBox = (props) => {
 	this.content = ''
@@ -23,6 +23,10 @@ const InputBox = (props) => {
 				onChange={ inputHandler }
 				onKeyPress={ keyHandler }
 			/>
+			<ScaleIcon 
+				scaleState={props.scaleState}
+				adjustVideo={props.dispatch}
+			/>
 			<PlayListIcon />
 		</div>
 	)
@@ -34,11 +38,25 @@ export default connect( state => (
 		playList: state.video.playList,
 		userId: state.video.userId,
 		videoNowTime: state.video.videoNowTime,
-		videoHost: state.video.videoHost
+		videoHost: state.video.videoHost,
+		scaleState: state.videoScale.large
 	}
 ))(InputBox)
 
 
+
+const ScaleIcon = (props) => {
+	let scaleState = props.scaleState
+	const videoScaleHandler = () => props.adjustVideo(adjustVideoScale(scaleState))
+	return (
+		<span 
+			id="scale-icon"
+			onClick={()=>videoScaleHandler()}
+		>
+			<img src="icons/scale.png" />
+		</span>
+	)
+}
 const PlayListIcon = () => {
 	return (
 		<span id="playlist-icon">

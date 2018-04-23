@@ -13,7 +13,7 @@ const videoInit = {
 	playList: []
 }
 
-export default function video(state=videoInit, action) {
+export function video(state=videoInit, action) {
 	switch(action.type) {
 		case '@VIDEO/PLAY':
 			return {
@@ -23,7 +23,22 @@ export default function video(state=videoInit, action) {
 				videoHost: action.videoHost,
 				videoNowTime: action.videoNowTime,
 				userId: videoInit.userId
-			} 
+			}
+		default:
+			return state
+	}
+}
+
+const videoScaleInit = {
+	large: true
+}
+
+export function videoScale(state=videoScaleInit, action) {
+	switch(action.type) {
+		case '@VIDEO/SCALE':
+			return {
+				large: action.large
+			}
 		default:
 			return state
 	}

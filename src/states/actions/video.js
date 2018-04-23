@@ -14,7 +14,7 @@ export function getVideo(text,messages,playList,hostKey,userId,videoNowTime) {
 	    		_getYoutubeData(vid)
 	    			.then( response => response.json())
 		    		.then( data => {
-		    			console.log(data)
+		    			//console.log(data)
 		    			const content = {
 							//user: '訪客',
 							videoId: vid,
@@ -91,12 +91,6 @@ export function getVideo(text,messages,playList,hostKey,userId,videoNowTime) {
 									videoHost: res.videoHost
 								})
 						})
-						dispatch({
-							type: '@VIDEO/PLAY',
-							live: true,
-							content: playList[0],
-							playList: playList
-						})
 						const message = {
 							msg: '新增影片: ' + content.title,
 							type: 1,
@@ -110,6 +104,40 @@ export function getVideo(text,messages,playList,hostKey,userId,videoNowTime) {
 							})
 						})
 		    		})
+		    	break
+		    case '@next':
+		    	if (playList.length >= 0) dispatch(playNext(playList,messages,userId))
+		    	break
+		    case '@close':
+		    	const dataObj = {
+							live: false,
+							content: playList[0],
+							playList: playList,
+							videoHost: userId,
+							videoNowTime: videoNowTime
+						}
+				_updateVideoData(dataObj).then( res => {
+							dispatch({
+									type: '@VIDEO/PLAY',
+									live: res.live,
+									content: res.content,
+									playList: res.playList,
+									videoNowTime: res.videoNowTime,
+									videoHost: res.videoHost
+								})
+						})
+						const message = {
+							msg: '關閉影片',
+							type: 1,
+							who: 2 //2: system
+						}
+						messages = [...messages, message]
+						_updateMessage(messages).then( data =>{
+							dispatch({
+								type: '@MSG/UPDATE',
+								msg: data
+							})
+						})
 		    	break
 		}
 	}
@@ -191,5 +219,13 @@ export function updateVideoState(res) {
 			videoHost: res.videoHost,
 			videoNowTime: res.videoNowTime
 		})
+	}
+}
+
+
+export function adjustVideoScale(state) {
+	return {
+		type: '@VIDEO/SCALE',
+		large: !state
 	}
 }

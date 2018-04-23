@@ -6,7 +6,6 @@ import './video-board.sass'
 import {playNext, updateVideoState} from 'states/actions/video.js'
 import {_updateVideoTime, _onVideo, _offVideoListener} from 'api/data.js'
 import {handleInputContent} from 'states/actions/message.js'
-
 class VideoBoad extends React.Component {
 	constructor(props) {
 		super(props)
@@ -36,7 +35,7 @@ class VideoBoad extends React.Component {
 		    }
 		}
 		return (
-			<div id="video-container">
+			<div id="video-container" className={this.props.scaleState ? "" : "small-scale"}>
 				{ this.props.live && <YouTube
 					videoId={this.props.videoId}
 					opts={opts}
@@ -50,7 +49,7 @@ class VideoBoad extends React.Component {
 	playListHandler() {
 		let playList = this.props.playList
 		let messages = this.props.messages
-		if ( playList.length > 1 ) this.props.dispatch(playNext(playList,messages,props.videoHost))
+		if ( playList.length > 1 ) this.props.dispatch(playNext(playList,messages,this.props.videoHost))
 	}
 	videoTimeHandler(event) {
 
@@ -94,6 +93,7 @@ export default connect(state => (
 		messages: state.message.msg,
 		videoNowTime: state.video.videoNowTime,
 		videoHost: state.video.videoHost,
-		userId: state.video.userId
+		userId: state.video.userId,
+		scaleState: state.videoScale.large
 	}
 ))(VideoBoad)
