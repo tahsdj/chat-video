@@ -37,6 +37,7 @@ class ChatBox extends React.Component {
 					type={m.type}
 					who={m.who}
 					key={`msg-${i}`}
+					pokemon={ m.who !== 2 ? m.pokemon : {}}
 				/>
 			)
 		})
@@ -50,7 +51,10 @@ class ChatBox extends React.Component {
 					{msgDom}
 				</div>
 				<InputBox />
-				<PlayList videoList={this.props.playList}/>
+				<PlayList 
+					videoList={this.props.playList}
+					playing={this.props.live}
+				/>
 			</div>
 		)
 	}
@@ -82,30 +86,52 @@ const InputBox = () => {
 const Message = (props) => {
 	let cssClass = ''
 	let name = ''
+	let color = ''
+	let pokemonName = ''
 	switch(props.who) {
 		case 0:
 			cssClass = 'message-box self-message'
+			color = 'white'
 			break
 		case 1:
 			cssClass = 'message-box'
 			name = '匿名: '
+			color = props.pokemon.color
+			pokemonName = props.pokemon.name
 			break
 		case 2:
 			cssClass = 'message-box system-message'
+			color = '#969696'
 	}
 	//const cssClass = props.self ? 'message-box self-message' : 'message-box'
 	return (
 		<div className={cssClass}>
-			<span> {name}{props.msg} </span>
+			<span 
+				style={{color: color}}
+				className={props.who === 1 && "pokemon-name"}
+				data-msg={pokemonName}
+			> 
+				{name}{props.msg} 
+			</span>
 		</div>
 	)
 }
 
 const PlayList = (props) => {
-	
+	let videoClass = ''
 	const playList = props.videoList.map( (v,i) => {
+		let videoClass = ''
+		if ( i === 0 ) {
+			if ( props.playing ) {
+				videoClass = 'video-option video-playing'
+			} else {
+				videoClass = 'video-option video-pause'
+			}
+		} else {
+			videoClass = 'video-option'
+		}
 		return (
-			<div className={ i === 0 ? "video-option video-playing" : "video-option"}>
+			<div className={videoClass}>
 				<img className="video-img" src={v.image}/>
 				<div className="video-info">
 					<span className="video-title">{v.title}</span>

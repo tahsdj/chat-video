@@ -1,13 +1,14 @@
 import {_listMessages, _updateMessage} from 'api/data.js'
 
 
-export function handleInputContent(text, messages, userId) {
+export function handleInputContent(text, messages, userId, pokemon) {
 	const message = {
 		msg: '',
 		type: 0, // 0: simple msg, 1: video action
 		who: 0, // 0: me
 		playList: [],
-		userId: ''
+		userId: '',
+		pokemon: pokemon
 	}
 	messages = messages.map( m => {
 					if ( m.who !== 2 ) m.who = m.userId === userId ? 0 : 1
@@ -30,7 +31,8 @@ export function handleInputContent(text, messages, userId) {
 					msg: text,
 					type: 0,
 					who: 1,
-					userId: userId
+					userId: userId,
+					pokemon: pokemon
 				}
 				const messagesForServer = [...messages, messageServer]
 				messages = [...messages, message]

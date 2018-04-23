@@ -30,7 +30,7 @@ export function video(state=videoInit, action) {
 }
 
 const videoScaleInit = {
-	large: true
+	large: false
 }
 
 export function videoScale(state=videoScaleInit, action) {

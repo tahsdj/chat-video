@@ -26,6 +26,19 @@
 		height: 15px
 		cursor: pointer
 		margin: 0px 5px
+
+		&:hover:after
+			content: attr(data-msg)
+			display: flex
+			padding: 5px
+			position: absolute
+			right: -2px
+			background-color: rgba(10,10,10,1)
+			color: white
+			border-radius: 2px
+			font-size: 0.8em
+			bottom: 30px
+
 		
 		img
 			width: 100%
@@ -36,6 +49,18 @@
 		width: 15px
 		height: 15px
 		cursor: pointer
+
+		&:hover:after
+			content: attr(data-msg)
+			display: inline-flex
+			padding: 5px
+			position: absolute
+			right: 5px
+			background-color: rgba(10,10,10,1)
+			color: white
+			border-radius: 2px
+			font-size: 0.8em
+			bottom: 30px
 		
 		img
 			width: 100%

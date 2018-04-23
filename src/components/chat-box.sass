@@ -38,7 +38,23 @@
 			color: rgba(100,100,100,1)
 			border-radius: 0 15px 15px 15px
 			box-shadow: 1px 1px 3px rgb(200,200,200)
-			
+
+		span.pokemon-name
+			position: relative
+
+			&:hover:after
+				content: attr(data-msg)
+				position: absolute
+				border-radius: 10px
+				padding: 3px
+				display: flex
+				right: -1px
+				top: 30px
+				font-size: 0.8em
+				background-color: rgba(70,70,70,.8)
+				color: white
+				z-index: 1
+
 	.self-message
 		align-items: flex-end
 		span 
@@ -92,6 +108,7 @@
 
 #playlist-container
 	display: none
+	flex-direction: column
 	position: fixed
 	top: calc(50vh)
 	left: calc(50%)
@@ -106,6 +123,7 @@
 		display: inline-flex
 		flex-direction: row
 		align-items: flex-start
+		width: calc(100%)
 		padding-left: 10px
 		filter: brightness(75%)
 		margin: 10px 0px 5px 0px
@@ -135,7 +153,7 @@
 		padding-left: 0
 		position: relative
 
-		&:after
+		&:before
 			content: ''
 			display: flex
 			position: absolute
@@ -148,4 +166,20 @@
 			border-bottom: 5px solid transparent
 			border-left: 10px solid rgba(230,230,230,1)
 
+	.video-pause
+		filter: brightness(100%)
+		padding-left: 0
+		position: relative
+
+		&:before
+			content: ''
+			display: flex
+			position: absolute
+			left: -15px
+			top: 22.5px
+			transform: translate(0px,-50%)
+			width: 4px
+			height: 15px
+			border-left: 3px solid rgba(230,230,230,1)
+			border-right: 3px solid rgba(230,230,230,1)
 

@@ -12,7 +12,7 @@ const InputBox = (props) => {
 	const keyHandler = (e) => {
 		if ( e.key === 'Enter' && this.content !== '' ) {
 			e.target.value = ''
-			props.dispatch(handleInputContent(this.content, props.msg, props.userId))
+			props.dispatch(handleInputContent(this.content, props.msg, props.userId, props.pokemon))
 			props.dispatch(getVideo(this.content, props.msg, props.playList, props.videoHost, props.userId, props.videoNowTime))
 		}
 	}
@@ -39,7 +39,8 @@ export default connect( state => (
 		userId: state.video.userId,
 		videoNowTime: state.video.videoNowTime,
 		videoHost: state.video.videoHost,
-		scaleState: state.videoScale.large
+		scaleState: state.videoScale.large,
+		pokemon: state.message.pokemon
 	}
 ))(InputBox)
 
@@ -51,6 +52,7 @@ const ScaleIcon = (props) => {
 	return (
 		<span 
 			id="scale-icon"
+			data-msg="change video scale"
 			onClick={()=>videoScaleHandler()}
 		>
 			<img src="icons/scale.png" />
@@ -59,7 +61,10 @@ const ScaleIcon = (props) => {
 }
 const PlayListIcon = () => {
 	return (
-		<span id="playlist-icon">
+		<span 
+			id="playlist-icon"
+			data-msg="show playlist"
+		>
 			<a href="#filter-mask">
 				<img src="icons/playlist.png" />
 			</a>

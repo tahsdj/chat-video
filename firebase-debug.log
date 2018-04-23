@@ -1,0 +1,84 @@
+[debug] [2018-04-23T08:25:36.602Z] ----------------------------------------------------------------------
+[debug] [2018-04-23T08:25:36.610Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\tahsd\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase init
+[debug] [2018-04-23T08:25:36.610Z] CLI Version:   3.15.3
+[debug] [2018-04-23T08:25:36.610Z] Platform:      win32
+[debug] [2018-04-23T08:25:36.610Z] Node Version:  v8.1.0
+[debug] [2018-04-23T08:25:36.612Z] Time:          Mon Apr 23 2018 16:25:36 GMT+0800 (台北標準時間)
+[debug] [2018-04-23T08:25:36.612Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-23T08:25:36.641Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2018-04-23T08:25:36.642Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\tahsd\web_sideproject\chat-video
+
+[debug] [2018-04-23T08:27:29.737Z] ----------------------------------------------------------------------
+[debug] [2018-04-23T08:27:29.741Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\tahsd\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase init
+[debug] [2018-04-23T08:27:29.742Z] CLI Version:   3.15.3
+[debug] [2018-04-23T08:27:29.742Z] Platform:      win32
+[debug] [2018-04-23T08:27:29.742Z] Node Version:  v8.1.0
+[debug] [2018-04-23T08:27:29.743Z] Time:          Mon Apr 23 2018 16:27:29 GMT+0800 (台北標準時間)
+[debug] [2018-04-23T08:27:29.743Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-23T08:27:29.759Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2018-04-23T08:27:29.760Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\tahsd\web_sideproject\chat-video
+
+[debug] [2018-04-23T08:28:19.677Z] ----------------------------------------------------------------------
+[debug] [2018-04-23T08:28:19.680Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\tahsd\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase init
+[debug] [2018-04-23T08:28:19.680Z] CLI Version:   3.15.3
+[debug] [2018-04-23T08:28:19.680Z] Platform:      win32
+[debug] [2018-04-23T08:28:19.680Z] Node Version:  v8.1.0
+[debug] [2018-04-23T08:28:19.681Z] Time:          Mon Apr 23 2018 16:28:19 GMT+0800 (台北標準時間)
+[debug] [2018-04-23T08:28:19.681Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-23T08:28:19.694Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2018-04-23T08:28:19.695Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\tahsd\web_sideproject\chat-video
+
+[debug] [2018-04-23T08:29:06.758Z] ----------------------------------------------------------------------
+[debug] [2018-04-23T08:29:06.763Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\tahsd\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase init
+[debug] [2018-04-23T08:29:06.763Z] CLI Version:   3.15.3
+[debug] [2018-04-23T08:29:06.763Z] Platform:      win32
+[debug] [2018-04-23T08:29:06.763Z] Node Version:  v8.1.0
+[debug] [2018-04-23T08:29:06.764Z] Time:          Mon Apr 23 2018 16:29:06 GMT+0800 (台北標準時間)
+[debug] [2018-04-23T08:29:06.764Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-23T08:29:06.777Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2018-04-23T08:29:06.778Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\tahsd\web_sideproject\chat-video
+
