@@ -21,6 +21,23 @@ html, body
 	min-height: 100vh
 	background-color: $bg-color
 
+	#main-header
+		display: flex
+		position: fixed
+		left: 0
+		top: 0
+		width: calc(100%)
+		padding: 5px 0px
+		flex-direction: row
+		align-items: center
+		justify-content: center
+		background-color: white
+		z-index: 999
+
+		>img
+			width: 30px
+			height: 30px
+
 
 	#chat-box-container
 		display: flex
@@ -29,8 +46,10 @@ html, body
 		align-items: center
 		width: calc(100% - 10px)
 		max-width: 600px
-		min-height: calc(100vh - 5px)
-		padding: 0px 20px 5px 20px
+		height: calc(100vh - 45px)
+		padding: 40px 20px 5px 20px
 		//background-color: white
+
+
 
 

@@ -29,9 +29,16 @@ export default class Main extends React.Component {
 		return (
 			<Provider store = {this.store} >
 				<div id="screen-container">
+					<Header />
 					<ChatBox />
 				</div>
 			</Provider>
 		)
 	}
 }
+
+const Header = () => (
+	<haeder id="main-header" >
+		<img src="icons/logo.png"/>
+	</haeder>
+)

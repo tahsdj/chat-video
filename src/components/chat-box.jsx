@@ -131,7 +131,10 @@ const PlayList = (props) => {
 			videoClass = 'video-option'
 		}
 		return (
-			<div className={videoClass}>
+			<div 
+				className={videoClass}
+				key={`video-${i}`}
+			>
 				<img className="video-img" src={v.image}/>
 				<div className="video-info">
 					<span className="video-title">{v.title}</span>
