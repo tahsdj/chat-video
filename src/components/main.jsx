@@ -9,6 +9,7 @@ import InputBox from 'components/input-box.jsx'
 import ChatBox from 'components/chat-box.jsx'
 import message from 'states/reducers/message.js'
 import {video, videoScale} from 'states/reducers/video.js'
+import {videoSearch} from 'states/reducers/video-search.js'
 
 export default class Main extends React.Component {
 	constructor(props) {
@@ -17,7 +18,7 @@ export default class Main extends React.Component {
 	}
 	componentWillMount() {
 		this.store = createStore(combineReducers({
-			message, video, videoScale
+			message, video, videoScale, videoSearch
 		}),compose(applyMiddleware(thunkMiddleware)))
 		let _this = this
 		this.store.subscribe(() => {
@@ -38,7 +39,7 @@ export default class Main extends React.Component {
 }
 
 const Header = () => (
-	<haeder id="main-header" >
+	<header id="main-header" >
 		<img src="icons/logo.png"/>
-	</haeder>
+	</header>
 )

@@ -78,20 +78,21 @@
 #filter-mask
 	display: none
 	position: fixed
+	flex-direction: column
+	align-items: center
 	left: 0
 	top: 0
 	width: 100vw
 	height: 100vh
 	background-color: rgba(30,38,49,.8)
-	filter: blur(3px)
 	z-index: 999
-	a
+	>a
 		display: flex
 		position: absolute
 		left: 0
 		top: 0
-		width: 100vw
-		height: 100vh
+		width: 10vw
+		height: 10vh
 
 	&:target
 		display: flex
@@ -101,96 +102,153 @@
 
 		~#chat-board
 			filter: blur(2px)
-	
-	//&:active
-	//	display: none
 
-
-#playlist-container
-	display: none
-	flex-direction: column
-	position: fixed
-	top: calc(50vh)
-	left: calc(50%)
-	transform: translate(-50%,-50%)
-	max-height: 80vh
-	width: calc(100% - 40px)
-	max-width: 500px
-	padding: 10px 20px
-	z-index: 999
-	overflow-y: auto
-	overflow-x: hidden
-
-	&::-webkit-scrollbar-track
-		border-radius: 2px
-	&::-webkit-scrollbar
-		width: 3px
-		background-color: rgba(200,200,200,0)
-	&::-webkit-scrollbar-thumb
-		border-radius: 2px
-		background-color: rgba(180,180,180,0.2)
-
-	.video-option
+	.video-related-container
 		display: inline-flex
-		flex-direction: row
-		align-items: flex-start
-		width: calc(100%)
-		padding-left: 10px
-		filter: brightness(75%)
-		margin: 10px 0px 5px 0px
+		position: relative
+		flex-direction: column
+		padding: 35px 10px 10px 10px
+		width: calc(100% - 20px)
+		max-width: 600px
 		
-		img.video-img
-			width: 60px
-			height: auto
+		.back-link
+			position: absolute
+			left: 10px
+			top: 10px
 
-		.video-info
-			display: inline-flex
-			flex-direction: column
-			padding: 0px 10px
+			>img
+				width: 20px
+				height: 20px
+
+		.title-name
+			display: flex
+			flex-direction: row
+			padding: 10px 10px
+			width: calc(100% - 20px)
 			align-items: flex-start
 
-			>span
-				color: rgba(220,220,220,1)
+			span
+				padding: 0px 5px
+				color: rgba(150,150,150,1)
+				text-decoration: none
+				cursor: pointer
 
-			span.video-title
-				font-size: 0.9em
+			>.active
+				color: white
 
-			span.video-author
-				font-size: 0.8em
-				color: rgba(200,200,200,1)
-	
-	.video-playing
-		filter: brightness(100%)
-		padding-left: 0
-		position: relative
-
-		&:before
-			content: ''
+		#playlist-container,#searchlist-container
 			display: flex
-			position: absolute
-			left: -15px
-			top: 22.5px
-			transform: translate(0px,-50%)
-			width: 0
-			height: 0
-			border-top: 5px solid transparent
-			border-bottom: 5px solid transparent
-			border-left: 10px solid rgba(230,230,230,1)
+			flex-direction: column
+			max-height: calc(100vh - 150px)
+			width: calc(100% - 10px)
+			padding: 10px 10px
+			z-index: 999
+			overflow-y: auto
+			overflow-x: hidden
 
-	.video-pause
-		filter: brightness(100%)
-		padding-left: 0
-		position: relative
+			&::-webkit-scrollbar-track
+				border-radius: 2px
+			&::-webkit-scrollbar
+				width: 3px
+				background-color: rgba(200,200,200,0)
+			&::-webkit-scrollbar-thumb
+				border-radius: 2px
+				background-color: rgba(180,180,180,0.2)
 
-		&:before
-			content: ''
-			display: flex
-			position: absolute
-			left: -15px
-			top: 22.5px
-			transform: translate(0px,-50%)
-			width: 4px
-			height: 15px
-			border-left: 3px solid rgba(230,230,230,1)
-			border-right: 3px solid rgba(230,230,230,1)
+			.video-option
+				display: inline-flex
+				flex-direction: row
+				align-items: flex-start
+				width: calc(100%)
+				padding-left: 10px
+				filter: brightness(75%)
+				margin: 10px 0px 5px 0px
+				
+				img.video-img
+					width: 60px
+					height: auto
 
+				.video-info
+					display: inline-flex
+					flex-direction: column
+					padding: 0px 10px
+					align-items: flex-start
+
+					>span
+						color: rgba(220,220,220,1)
+
+					span.video-title
+						font-size: 0.9em
+
+					span.video-author
+						font-size: 0.8em
+						color: rgba(200,200,200,1)
+			
+			.search-option
+				padding-left: 0
+				justify-content: space-between
+
+				.info-container
+					display: inline-flex
+					flex-direction: row
+					align-items: flex-start
+
+					.video-info
+						>span
+							color: white
+				.options
+					display: flex
+					flex-direction: column
+					width: 50px
+					min-width: 50px
+					align-items: center
+
+					button
+						padding: 3px 10px
+						background-color: transparent
+						border: 1px solid rgba(230,230,230,1)
+						border-radius: 10px
+						color: rgba(230,230,230,1)
+						outline: none
+						margin-bottom: 5px
+						transition: all .3s
+						cursor: pointer
+
+						&:hover
+							background-color: rgba(230,230,230,.5)
+
+			.video-playing
+				filter: brightness(100%)
+				padding-left: 5
+				position: relative
+				color: white
+
+				&:before
+					content: ''
+					display: flex
+					position: absolute
+					left: -15px
+					top: 22.5px
+					transform: translate(0px,-50%)
+					width: 0
+					height: 0
+					border-top: 7.5px solid transparent
+					border-bottom: 7.5px solid transparent
+					border-left: 15px solid rgba(230,230,230,1)
+
+			.video-pause
+				filter: brightness(100%)
+				padding-left: 0
+				position: relative
+
+				&:before
+					content: ''
+					display: flex
+					position: absolute
+					left: -15px
+					top: 22.5px
+					transform: translate(0px,-50%)
+					width: 4px
+					height: 15px
+					border-left: 3px solid rgba(230,230,230,1)
+					border-right: 3px solid rgba(230,230,230,1)
