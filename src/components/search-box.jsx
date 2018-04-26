@@ -7,7 +7,6 @@ const SearchBox = (props) => {
 	this.input = ''
 	const inputHandler = (e) => {
 		this.input = e.target.value
-		console.log(this.input)
 	}
 	const keyEventHandler = (e) => {
 		if ( e.key === 'Enter' && this.input !== '' ) {

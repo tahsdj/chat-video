@@ -43,3 +43,25 @@ export function videoScale(state=videoScaleInit, action) {
 			return state
 	}
 }
+
+const videoMsgStatusInit = {
+	loading: false,
+	msg: ''
+}
+
+export function videoMsgStatus(state=videoMsgStatusInit, action) {
+	switch(action.type) {
+		case '@VIDEO/LOADING_START':
+			return {
+				loading: true,
+				msg: action.msg
+			}
+		case '@VIDEO/LOADING_END':
+			return {
+				loading: false,
+				msg: action.msg
+			}
+		default:
+			return state
+	}
+}

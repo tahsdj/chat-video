@@ -12,7 +12,7 @@ export function searchVideos(text) {
 				}
 				return content
 			})
-			console.log('search results: ' + JSON.stringify(res[0].snippet))
+			//console.log('search results: ' + JSON.stringify(res[0].snippet))
 			dispatch({
 				type: '@VIDEO/SEARCH',
 				searchList: list

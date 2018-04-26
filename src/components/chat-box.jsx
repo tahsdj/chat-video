@@ -9,7 +9,7 @@ import {userId} from 'api/constant.js'
 import {_onMessage} from 'api/data.js'
 import SearchBox from 'components/search-box.jsx'
 import {changeSearchState} from 'states/actions/video-search.js'
-import {getVideo} from 'states/actions/video.js'
+import {getVideo, showVideoEvent} from 'states/actions/video.js'
 
 class ChatBox extends React.Component {
 	constructor(props) {
@@ -57,6 +57,8 @@ class ChatBox extends React.Component {
 						userId={this.props.userId}
 						videoHost={this.props.videoHost}
 						videoNowTime={this.props.videoNowTime}
+						videoMsg={this.props.videoMsg}
+						videoMsgLoading={this.props.videoMsgLoading}
 					/>
 				</div>
 				<div id="chat-board">
@@ -82,7 +84,9 @@ export default connect( state => (
 		videoNowTime: state.video.videoNowTime,
 		videoHost: state.video.videoHost,
 		searchList: state.videoSearch.searchList,
-		searchState: state.videoSearch.showState
+		searchState: state.videoSearch.showState,
+		videoMsg: state.videoMsgStatus.msg,
+		videoMsgLoading: state.videoMsgStatus.loading
 	}
 ))(ChatBox)
 
@@ -141,6 +145,7 @@ const VideoPage = (props) => {
 											userId={props.userId}
 											videoHost={props.videoHost}
 											videoNowTime={props.videoNowTime}
+											videoMsgLoading={props.videoMsgLoading}
 										/>) : 
 										(<PlayList
 											videoList={props.playList}
@@ -158,16 +163,17 @@ const VideoPage = (props) => {
 					className={props.searchState ? "unactive" : "active"}
 					onClick={()=>props.dispatch(changeSearchState(props.searchList,false))}
 				>
-					PlayList
+					Playlist
 				</span>
 				<span
 					className={props.searchState ? "active" : "unactive"}
 					onClick={()=>props.dispatch(changeSearchState(props.searchList,true))}
 				>
-					SearchList
+					Searchlist
 				</span>
 			</div>
 			{listDom}
+			{props.videoMsgLoading && <div id="video-msg">{props.videoMsg}</div>}
 		</div>
 	)
 }
@@ -224,12 +230,22 @@ const SearchList = (props) => {
 				</div>
 				<div className="options">
 					<button
-						onClick={()=>props.dispatch(getVideo(`@add add?v=${v.videoId}`, props.msg, props.playList, props.videoHost, props.userId, props.videoNowTime))}
+						onClick={()=>{
+							if ( !props.videoMsgLoading ) {
+								props.dispatch(getVideo(`@add add?v=${v.videoId}`, props.msg, props.playList, props.videoHost, props.userId, props.videoNowTime))
+								props.dispatch(showVideoEvent('video added'))
+							}
+						}}
 					>
 						add
 					</button>
 					<button
-						onClick={()=>props.dispatch(getVideo(`@play play?v=${v.videoId}`, props.msg, props.playList, props.videoHost, props.userId, props.videoNowTime))}
+						onClick={()=>{
+							if ( !props.videoMsgLoading ) {
+								props.dispatch(getVideo(`@play play?v=${v.videoId}`, props.msg, props.playList, props.videoHost, props.userId, props.videoNowTime))
+								props.dispatch(showVideoEvent('play success'))
+							}
+						}}
 					>
 						play
 					</button>

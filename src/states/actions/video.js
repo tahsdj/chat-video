@@ -229,3 +229,17 @@ export function adjustVideoScale(state) {
 		large: !state
 	}
 }
+
+
+export function showVideoEvent(msg) {
+	return (dispatch) => {
+		dispatch({
+			type: '@VIDEO/LOADING_START',
+			msg: msg
+		})
+		setTimeout(()=>dispatch({
+			type: '@VIDEO/LOADING_END',
+			msg: msg
+		}),1500)
+	}
+}
