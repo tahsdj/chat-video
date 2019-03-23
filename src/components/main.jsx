@@ -10,11 +10,12 @@ import ChatBox from 'components/chat-box.jsx'
 import message from 'states/reducers/message.js'
 import {video, videoScale, videoMsgStatus} from 'states/reducers/video.js'
 import {videoSearch} from 'states/reducers/video-search.js'
+import VideoPage from 'components/video-page.jsx'
+import Screen from 'components/screen.jsx'
 
 export default class Main extends React.Component {
 	constructor(props) {
 		super(props)
-		//this.content = {}
 	}
 	componentWillMount() {
 		this.store = createStore(combineReducers({
@@ -30,8 +31,9 @@ export default class Main extends React.Component {
 		return (
 			<Provider store = {this.store} >
 				<div id="screen-container">
-					<Header />
-					<ChatBox />
+					{/* <Header />
+					<ChatBox /> */}
+					<Screen />
 				</div>
 			</Provider>
 		)

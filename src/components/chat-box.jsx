@@ -10,6 +10,7 @@ import {_onMessage} from 'api/data.js'
 import SearchBox from 'components/search-box.jsx'
 import {changeSearchState} from 'states/actions/video-search.js'
 import {getVideo, showVideoEvent} from 'states/actions/video.js'
+import  VideoPage from 'components/video-page.jsx'
 
 class ChatBox extends React.Component {
 	constructor(props) {
@@ -46,26 +47,43 @@ class ChatBox extends React.Component {
 		})
 		return (
 			<div id="chat-box-container">
-				<div id="filter-mask">
-					<VideoPage 
-						playList={this.props.playList}
-						searchList={this.props.searchList}
-						live={this.props.live}
-						searchState={this.props.searchState}
-						dispatch={this.props.dispatch}
-						msg={this.props.msg}
-						userId={this.props.userId}
-						videoHost={this.props.videoHost}
-						videoNowTime={this.props.videoNowTime}
-						videoMsg={this.props.videoMsg}
-						videoMsgLoading={this.props.videoMsgLoading}
-					/>
+				<div id="chat-container">
+					<div id="filter-mask">
+						<VideoPage 
+							playList={this.props.playList}
+							searchList={this.props.searchList}
+							live={this.props.live}
+							searchState={this.props.searchState}
+							dispatch={this.props.dispatch}
+							msg={this.props.msg}
+							userId={this.props.userId}
+							videoHost={this.props.videoHost}
+							videoNowTime={this.props.videoNowTime}
+							videoMsg={this.props.videoMsg}
+							videoMsgLoading={this.props.videoMsgLoading}
+						/>
+					</div>
+					<div id="chat-board">
+						{this.props.live && <VideoBoard />}
+						{msgDom}
+					</div>
+					<InputBox />
 				</div>
-				<div id="chat-board">
-					{this.props.live && <VideoBoard />}
-					{msgDom}
+				<div id="video-container">
+						{/* <VideoPage 
+							playList={this.props.playList}
+							searchList={this.props.searchList}
+							live={this.props.live}
+							searchState={this.props.searchState}
+							dispatch={this.props.dispatch}
+							msg={this.props.msg}
+							userId={this.props.userId}
+							videoHost={this.props.videoHost}
+							videoNowTime={this.props.videoNowTime}
+							videoMsg={this.props.videoMsg}
+							videoMsgLoading={this.props.videoMsgLoading}
+						/> */}
 				</div>
-				<InputBox />
 			</div>
 		)
 	}
@@ -135,128 +153,128 @@ const Message = (props) => {
 }
 
 
-const VideoPage = (props) => {
-	const listDom = props.searchState ? (<SearchList 
-											videoList={props.searchList}
-											playList={props.playList}
-											playing={props.live}
-											dispatch={props.dispatch}
-											msg={props.msg}
-											userId={props.userId}
-											videoHost={props.videoHost}
-											videoNowTime={props.videoNowTime}
-											videoMsgLoading={props.videoMsgLoading}
-										/>) : 
-										(<PlayList
-											videoList={props.playList}
-											playing={props.live}
+// const VideoPage = (props) => {
+// 	const listDom = props.searchState ? (<SearchList 
+// 											videoList={props.searchList}
+// 											playList={props.playList}
+// 											playing={props.live}
+// 											dispatch={props.dispatch}
+// 											msg={props.msg}
+// 											userId={props.userId}
+// 											videoHost={props.videoHost}
+// 											videoNowTime={props.videoNowTime}
+// 											videoMsgLoading={props.videoMsgLoading}
+// 										/>) : 
+// 										(<PlayList
+// 											videoList={props.playList}
+// 											playing={props.live}
 
-										/>)
-	return (
-		<div className="video-related-container">
-			<a href="#app" className="back-link">
-				<img src="icons/back.png" />
-			</a>
-			<SearchBox />
-			<div className="title-name">
-				<span 
-					className={props.searchState ? "unactive" : "active"}
-					onClick={()=>props.dispatch(changeSearchState(props.searchList,false))}
-				>
-					Playlist
-				</span>
-				<span
-					className={props.searchState ? "active" : "unactive"}
-					onClick={()=>props.dispatch(changeSearchState(props.searchList,true))}
-				>
-					Searchlist
-				</span>
-			</div>
-			{listDom}
-			{props.videoMsgLoading && <div id="video-msg">{props.videoMsg}</div>}
-		</div>
-	)
-}
+// 										/>)
+// 	return (
+// 		<div className="video-related-container">
+// 			<a href="#app" className="back-link">
+// 				<img src="icons/back.png" />
+// 			</a>
+// 			<SearchBox />
+// 			<div className="title-name">
+// 				<span 
+// 					className={props.searchState ? "unactive" : "active"}
+// 					onClick={()=>props.dispatch(changeSearchState(props.searchList,false))}
+// 				>
+// 					Playlist
+// 				</span>
+// 				<span
+// 					className={props.searchState ? "active" : "unactive"}
+// 					onClick={()=>props.dispatch(changeSearchState(props.searchList,true))}
+// 				>
+// 					Searchlist
+// 				</span>
+// 			</div>
+// 			{listDom}
+// 			{props.videoMsgLoading && <div id="video-msg">{props.videoMsg}</div>}
+// 		</div>
+// 	)
+// }
 
 
-const PlayList = (props) => {
-	let videoClass = ''
-	const playList = props.videoList.map( (v,i) => {
-		let videoClass = ''
-		if ( i === 0 ) {
-			if ( props.playing ) {
-				videoClass = 'video-option video-playing'
-			} else {
-				videoClass = 'video-option video-pause'
-			}
-		} else {
-			videoClass = 'video-option'
-		}
-		return (
-			<div 
-				className={videoClass}
-				key={`video-${i}`}
-			>
-				<img className="video-img" src={v.image}/>
-				<div className="video-info">
-					<span className="video-title">{v.title}</span>
-					<span className="video-author">{`by ${v.channelName}`}</span>
-				</div>
-			</div>
-		)
-	})
+// const PlayList = (props) => {
+// 	let videoClass = ''
+// 	const playList = props.videoList.map( (v,i) => {
+// 		let videoClass = ''
+// 		if ( i === 0 ) {
+// 			if ( props.playing ) {
+// 				videoClass = 'video-option video-playing'
+// 			} else {
+// 				videoClass = 'video-option video-pause'
+// 			}
+// 		} else {
+// 			videoClass = 'video-option'
+// 		}
+// 		return (
+// 			<div 
+// 				className={videoClass}
+// 				key={`video-${i}`}
+// 			>
+// 				<img className="video-img" src={v.image}/>
+// 				<div className="video-info">
+// 					<span className="video-title">{v.title}</span>
+// 					<span className="video-author">{`by ${v.channelName}`}</span>
+// 				</div>
+// 			</div>
+// 		)
+// 	})
 	
-	return (
-		<div id="playlist-container">
-			{playList}
-		</div>
-	)
-}
+// 	return (
+// 		<div id="playlist-container">
+// 			{playList}
+// 		</div>
+// 	)
+// }
 
-const SearchList = (props) => {
-	let videoClass = ''
-	const playList = props.videoList.map( (v,i) => {
-		return (
-			<div 
-				className="video-option search-option"
-				key={`video-${i}`}
-			>
-				<div className="info-container">
-					<img className="video-img" src={v.imageUrl}/>
-					<div className="video-info">
-						<span className="video-title">{v.title}</span>
-						<span className="video-author">{`by ${v.channelTitle}`}</span>
-					</div>
-				</div>
-				<div className="options">
-					<button
-						onClick={()=>{
-							if ( !props.videoMsgLoading ) {
-								props.dispatch(getVideo(`@add add?v=${v.videoId}`, props.msg, props.playList, props.videoHost, props.userId, props.videoNowTime))
-								props.dispatch(showVideoEvent('video added'))
-							}
-						}}
-					>
-						add
-					</button>
-					<button
-						onClick={()=>{
-							if ( !props.videoMsgLoading ) {
-								props.dispatch(getVideo(`@play play?v=${v.videoId}`, props.msg, props.playList, props.videoHost, props.userId, props.videoNowTime))
-								props.dispatch(showVideoEvent('play success'))
-							}
-						}}
-					>
-						play
-					</button>
-				</div>
-			</div>
-		)
-	})
+// const SearchList = (props) => {
+// 	let videoClass = ''
+// 	const playList = props.videoList.map( (v,i) => {
+// 		return (
+// 			<div 
+// 				className="video-option search-option"
+// 				key={`video-${i}`}
+// 			>
+// 				<div className="info-container">
+// 					<img className="video-img" src={v.imageUrl}/>
+// 					<div className="video-info">
+// 						<span className="video-title">{v.title}</span>
+// 						<span className="video-author">{`by ${v.channelTitle}`}</span>
+// 					</div>
+// 				</div>
+// 				<div className="options">
+// 					<button
+// 						onClick={()=>{
+// 							if ( !props.videoMsgLoading ) {
+// 								props.dispatch(getVideo(`@add add?v=${v.videoId}`, props.msg, props.playList, props.videoHost, props.userId, props.videoNowTime))
+// 								props.dispatch(showVideoEvent('video added'))
+// 							}
+// 						}}
+// 					>
+// 						add
+// 					</button>
+// 					<button
+// 						onClick={()=>{
+// 							if ( !props.videoMsgLoading ) {
+// 								props.dispatch(getVideo(`@play play?v=${v.videoId}`, props.msg, props.playList, props.videoHost, props.userId, props.videoNowTime))
+// 								props.dispatch(showVideoEvent('play success'))
+// 							}
+// 						}}
+// 					>
+// 						play
+// 					</button>
+// 				</div>
+// 			</div>
+// 		)
+// 	})
 	
-	return (
-		<div id="searchlist-container">
-			{playList}
-		</div>
-	)
-}
+// 	return (
+// 		<div id="searchlist-container">
+// 			{playList}
+// 		</div>
+// 	)
+// }
