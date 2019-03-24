@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
+import ChatBox from 'components/chat-box.jsx'
+import  VideoPage from 'components/video-page.jsx'
 
 const ScreenContainer = styled.div`
     display: flex;
@@ -11,17 +13,15 @@ const ScreenContainer = styled.div`
 `
 const ChatRoom = styled.div`
     display: flex;
-    min-width: 400px;
+    width: 400px;
     height: calc(100%);
-    flex-grow: 3;
-    // background-color: red;
+    flex-grow: 5;
 `
 const VideoRoom = styled.div`
     display: flex;
-    min-width: 300px;
+    width: 300px;
     height: calc(100%);
-    flex-grow: 1;
-    // background-color: green;
+    flex-grow: 4;
 `
 
 
@@ -33,10 +33,22 @@ class Screen extends Component {
         return (
             <ScreenContainer>
                 <ChatRoom>
-                    chat
+                    <ChatBox />
                 </ChatRoom>
                 <VideoRoom>
-                    video
+                    <VideoPage 
+                        // playList={[]}
+                        // searchList={[]}
+                        // live={true}
+                        // searchState={false}
+                        // dispatch={''}
+                        // msg={''}
+                        // userId={''}
+                        // videoHost={true}
+                        // videoNowTime={''}
+                        // videoMsg={''}
+                        // videoMsgLoading={false}
+                    />
                 </VideoRoom>
             </ScreenContainer>
         )

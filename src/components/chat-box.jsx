@@ -47,8 +47,8 @@ class ChatBox extends React.Component {
 		})
 		return (
 			<div id="chat-box-container">
-				<div id="chat-container">
-					<div id="filter-mask">
+				{/* <div id="chat-container"> */}
+					{/* <div id="filter-mask">
 						<VideoPage 
 							playList={this.props.playList}
 							searchList={this.props.searchList}
@@ -62,28 +62,13 @@ class ChatBox extends React.Component {
 							videoMsg={this.props.videoMsg}
 							videoMsgLoading={this.props.videoMsgLoading}
 						/>
-					</div>
-					<div id="chat-board">
-						{this.props.live && <VideoBoard />}
-						{msgDom}
-					</div>
-					<InputBox />
+					</div> */}
+				<div id="chat-board">
+					{/* {this.props.live && <VideoBoard />} */}
+					{msgDom}
 				</div>
-				<div id="video-container">
-						{/* <VideoPage 
-							playList={this.props.playList}
-							searchList={this.props.searchList}
-							live={this.props.live}
-							searchState={this.props.searchState}
-							dispatch={this.props.dispatch}
-							msg={this.props.msg}
-							userId={this.props.userId}
-							videoHost={this.props.videoHost}
-							videoNowTime={this.props.videoNowTime}
-							videoMsg={this.props.videoMsg}
-							videoMsgLoading={this.props.videoMsgLoading}
-						/> */}
-				</div>
+				<InputBox />
+				{/* </div> */}
 			</div>
 		)
 	}

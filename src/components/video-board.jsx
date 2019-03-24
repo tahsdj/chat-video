@@ -6,6 +6,7 @@ import './video-board.sass'
 import {playNext, updateVideoState} from 'states/actions/video.js'
 import {_updateVideoTime, _onVideo, _offVideoListener} from 'api/data.js'
 import {handleInputContent} from 'states/actions/message.js'
+
 class VideoBoad extends React.Component {
 	constructor(props) {
 		super(props)
@@ -28,14 +29,14 @@ class VideoBoad extends React.Component {
 	}
 	render() {
 		const opts = {
-		    height: '100%',
+		    height: '50px',
 		    width: '100%',
 		    playerVars: { // https://developers.google.com/youtube/player_parameters
 		    	autoplay: 1
 		    }
 		}
 		return (
-			<div id="video-container" className={this.props.scaleState ? "" : "small-scale"}>
+			<div id="video-container">
 				{ this.props.live && <YouTube
 					videoId={this.props.videoId}
 					opts={opts}

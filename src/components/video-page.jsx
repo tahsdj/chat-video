@@ -10,6 +10,7 @@ import {_onMessage} from 'api/data.js'
 import SearchBox from 'components/search-box.jsx'
 import {changeSearchState} from 'states/actions/video-search.js'
 import {getVideo, showVideoEvent} from 'states/actions/video.js'
+import styled from 'styled-components'
 
 
 class VideoPage extends React.Component {
@@ -40,6 +41,7 @@ class VideoPage extends React.Component {
                     <img src="icons/back.png" />
                 </a>
                 <SearchBox />
+				<VideoBar />
                 <div className="title-name">
                     <span 
                         className={this.props.searchState ? "unactive" : "active"}
@@ -54,16 +56,58 @@ class VideoPage extends React.Component {
                         Searchlist
                     </span>
                 </div>
-                {listDom}
+				{/* {listDom} */}
+				<PlayList
+					videoList={this.props.playList}
+					playing={this.props.live}
+				/>
                 {this.props.videoMsgLoading && <div id="video-msg">{this.props.videoMsg}</div>}
             </div>
         )
     }
 }
 
-export default VideoPage
+export default connect( state => (
+	{
+		msg: state.message.msg,
+		live: state.video.live,
+		playList: state.video.playList,
+		userId: state.video.userId,
+		videoNowTime: state.video.videoNowTime,
+		videoHost: state.video.videoHost,
+		searchList: state.videoSearch.searchList,
+		searchState: state.videoSearch.showState,
+		videoMsg: state.videoMsgStatus.msg,
+		videoMsgLoading: state.videoMsgStatus.loading
+	}
+))(VideoPage)
 
 
+// export default VideoPage
+
+
+const VideoBarContainer = styled.div`
+	display: inline-flex;
+	flex-direction: row;
+	height: 50px;
+	align-items: flex-start;
+	border: 1px solid white;
+`
+
+const Video = styled.div`
+	display: flex;
+	width: 80px;
+	height: 50px;
+	border: 1px solid white;
+`
+
+const VideoBar = () => (
+	<VideoBarContainer>
+		<Video>
+			<VideoBoard />
+		</Video>
+	</VideoBarContainer>
+)
 
 const PlayList = (props) => {
 	let videoClass = ''
