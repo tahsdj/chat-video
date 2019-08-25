@@ -2,18 +2,30 @@ import React from 'react'
 import './input-box.sass'
 import {connect} from 'react-redux'
 import {handleInputContent} from 'states/actions/message.js'
-import {getVideo, adjustVideoScale} from 'states/actions/video.js'
+import {getVideo, adjustVideoScale, playNext} from 'states/actions/video.js'
+import dayjs from 'dayjs'
+
 
 const InputBox = (props) => {
 	this.content = ''
+	const {playList, msg, userId} = props
 	const inputHandler = (e) => {
 		this.content = e.target.value
 	}
 	const keyHandler = (e) => {
 		if ( e.key === 'Enter' && this.content !== '' ) {
 			e.target.value = ''
-			props.dispatch(handleInputContent(this.content, props.msg, props.userId, props.pokemon))
-			props.dispatch(getVideo(this.content, props.msg, props.playList, props.videoHost, props.userId, props.videoNowTime))
+			const date = dayjs().format('YYYY-MM-DD')
+			const myMessage = {
+				msg: this.content,
+				type: 0, // 0: simple msg, 1: video action
+				who: 0, // 0: me
+				userId: props.userId,
+				pokemon: props.pokemon,
+				time: dayjs().format('YYYY-MM-DD')
+			}
+			props.dispatch(handleInputContent(myMessage, props.msg))
+			// props.dispatch(getVideo(this.content, props.msg, props.playList, props.videoHost, props.userId, props.videoNowTime))
 		}
 	}
 	return (
@@ -26,8 +38,12 @@ const InputBox = (props) => {
 			<ScaleIcon 
 				scaleState={props.scaleState}
 				adjustVideo={props.dispatch}
+				playList={playList}
+				messages={msg}
+				userId={userId}
+				dispatch={props.dispatch}
 			/>
-			<PlayListIcon />
+			{/* <PlayListIcon /> */}
 		</div>
 	)
 }
@@ -49,13 +65,24 @@ export default connect( state => (
 const ScaleIcon = (props) => {
 	let scaleState = props.scaleState
 	const videoScaleHandler = () => props.adjustVideo(adjustVideoScale(scaleState))
+	const {playList, messages, userId} = props
 	return (
 		<span 
 			id="scale-icon"
-			data-msg="change video scale"
-			onClick={()=>videoScaleHandler()}
+			data-msg="next"
+			// onClick={()=>videoScaleHandler()}
+			onClick={()=>{
+				if (playList.length > 1) {
+					const message = {
+						msg: '✂️✂️✂️✂️ 某人卡歌 ✂️✂️✂️✂️',
+						type: 1,
+						who: 2
+					}
+					props.dispatch(playNext(playList,messages,userId, message))
+				}
+			}}
 		>
-			<img src="icons/scale.png" />
+			<img src="icons/cut.png" />
 		</span>
 	)
 }

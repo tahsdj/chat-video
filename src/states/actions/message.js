@@ -1,64 +1,69 @@
 import {_listMessages, _updateMessage} from 'api/data.js'
+import dayjs from 'dayjs'
 
-
-export function handleInputContent(text, messages, userId, pokemon) {
-	const message = {
-		msg: '',
-		type: 0, // 0: simple msg, 1: video action
-		who: 0, // 0: me
-		playList: [],
-		userId: '',
-		pokemon: pokemon
-	}
-	messages = messages.map( m => {
-					if ( m.who !== 2 ) m.who = m.userId === userId ? 0 : 1
+// export function handleInputContent(text, messages, userId, pokemon) {
+export function handleInputContent(myMessage, messages) {
+	const frontendMessages = [...messages,myMessage].map( m => {
+					if ( m.who !== 2 ) m.who = m.userId === myMessage.userId ? 0 : 1
 					return m
 				})
 	return (dispatch) => {
-		switch(text.split(' ')[0]) {
-			case '@play':
-			case '@add':
-			case '@onListenMessage':
+
+		const messagesForServer = [...messages,myMessage]
+		_updateMessage(messagesForServer)
+			.then(data=>{
+				// update state after database updated
 				dispatch({
 					type: '@MSG/UPDATE',
-					msg: messages
+					msg: frontendMessages
 				})
-				break
-			default:
-				message.msg = text
-				message.userId = userId
-				const messageServer = {
-					msg: text,
-					type: 0,
-					who: 1,
-					userId: userId,
-					pokemon: pokemon
-				}
-				const messagesForServer = [...messages, messageServer]
-				messages = [...messages, message]
-				//console.log(messages)
-				_updateMessage(messagesForServer).then(data=>{
-					dispatch({
-						type: '@MSG/UPDATE',
-						msg: messages
-					})
-				})
-		}
+			})
+			.catch( err => console.log(err))
 	}
 }
 
 export function getMessageData() {
 	return (dispatch) => {
-		_listMessages().then( data => {
+		_listMessages()
+			.then( res => {
+				const data = res === 0 ? [] : 
+					res
+						.filter( e => {
+							// deal with the time of data, it will be removed if it have been saved more than 1 day
+							if ( e.time ) {
+								const currentFormat = dayjs().format('YYYY-MM-DD')
+								const currentTime = dayjs(currentFormat)
+								const msgTime = dayjs(e.time)
+								const timeDiff = currentTime.diff(msgTime, 'day')
+								const result = (e.type === 0 && timeDiff <= 1)
+								if (result) return true
+								else return false
+							}
+							return false
+						})
+						.map( d => {
+							if ( d.who === 0 ) d.who = 1
+							return d
+						})
+				dispatch({
+					type: '@MSG/UPDATE',
+					msg: data
+				})
+				// refresh the data
+				_updateMessage(data)
+			
+			})
+	}
+}
 
-			data = data === 0 ? [] : data.map( d => {
-			 	if ( d.who === 0 ) d.who = 1
-			 	return d
-			})
-			dispatch({
-				type: '@MSG/UPDATE',
-				msg: data
-			})
-		})
+
+export const updateMessages = (messages, userId) => {
+	const newMessages = messages.map( m => {
+		if ( m.who !== 2 ) m.who = m.userId === userId ? 0 : 1
+		return m
+	})
+	return {
+		type: '@MSG/UPDATE',
+		msg: newMessages
 	}
 }

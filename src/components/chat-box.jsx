@@ -2,7 +2,7 @@ import React from 'react'
 import './chat-box.sass'
 import InputBox from 'components/input-box.jsx'
 import {connect} from 'react-redux'
-import {handleInputContent, getMessageData} from 'states/actions/message.js'
+import {handleInputContent, getMessageData, updateMessages} from 'states/actions/message.js'
 import VideoBoard from 'components/video-board.jsx'
 import {getVideoData} from 'states/actions/video.js'
 import {userId} from 'api/constant.js'
@@ -17,12 +17,14 @@ class ChatBox extends React.Component {
 		super(props)
 		this.onMessageHandler = this.onMessageHandler.bind(this)
 	}
-	componentWillMount() {
+	// componentWillMount() {
+	// 	this.props.dispatch(getMessageData())
+	// 	this.props.dispatch(getVideoData())
+	// 	//console.log('id:  ' + this.userId)
+	// }
+	componentDidMount() {
 		this.props.dispatch(getMessageData())
 		this.props.dispatch(getVideoData())
-		//console.log('id:  ' + this.userId)
-	}
-	componentDidMount() {
 		const d = document.getElementById("chat-board")
 		d.scrollTo(0,d.scrollHeight)
 		_onMessage(this.onMessageHandler)
@@ -32,9 +34,8 @@ class ChatBox extends React.Component {
 		d.scrollTo(0,d.scrollHeight)
 	}
 	render() {
-		let msgDom = []
 		const msg = this.props.msg
-		msgDom = msg.map( (m,i) => {
+		const msgDoms = msg.map( (m,i) => {
 			return (
 				<Message 
 					msg={m.msg}
@@ -65,7 +66,7 @@ class ChatBox extends React.Component {
 					</div> */}
 				<div id="chat-board">
 					{/* {this.props.live && <VideoBoard />} */}
-					{msgDom}
+					{msgDoms}
 				</div>
 				<InputBox />
 				{/* </div> */}
@@ -74,7 +75,9 @@ class ChatBox extends React.Component {
 	}
 	onMessageHandler(messages) {
 		//console.log('messages: ' + messages)
-		this.props.dispatch(handleInputContent('@onListenMessage 123', messages, this.props.userId))
+		// this.props.dispatch(handleInputContent('@onListenMessage 123', messages, this.props.userId))
+		const {userId} = this.props
+		this.props.dispatch(updateMessages(messages, userId))
 	}
 }
 

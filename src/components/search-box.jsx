@@ -11,13 +11,14 @@ const SearchBox = (props) => {
 	const keyEventHandler = (e) => {
 		if ( e.key === 'Enter' && this.input !== '' ) {
 			props.dispatch(searchVideos(this.input))
-			e.target.value = ''
+			// change to show search list
+			props.setSearchState(true)
 		}
 	}
 	return (
 		<div id="search-container">
 			<input 
-				placeholder="Search the video"
+				placeholder="Search videos"
 				onChange={inputHandler}
 				onKeyPress={keyEventHandler}
 			/>

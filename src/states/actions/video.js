@@ -145,7 +145,8 @@ export function getVideo(text,messages,playList,hostKey,userId,videoNowTime) {
 
 
 
-export function playNext(playList,messages,videoHost) {
+export function playNext(playList,messages,videoHost, anotherMsg=none) {
+	console.log('playNext: ', playList)
 	playList = playList.slice(1,playList.length)
 	return (dispatch) => {
 		const dataObj = {
@@ -170,7 +171,7 @@ export function playNext(playList,messages,videoHost) {
 			type: 1,
 			who: 2 //2: system
 		}
-		messages = [...messages, message]
+		messages = anotherMsg ? [...messages, anotherMsg, message] : [...messages, message]
 		_updateMessage(messages).then(data=>{
 							dispatch({
 								type: '@MSG/UPDATE',

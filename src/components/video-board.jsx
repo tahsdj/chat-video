@@ -15,9 +15,6 @@ class VideoBoad extends React.Component {
 		this.videoStateHandler = this.videoStateHandler.bind(this)
 		this.onVideoHandler = this.onVideoHandler.bind(this)
 		this.timer = null
-	}
-	componentWillMount() {
-		//this.userId =  userId
 		this.userId = this.props.userId
 	}
 	componentDidMount() {
@@ -27,30 +24,16 @@ class VideoBoad extends React.Component {
 		// cancel video realtime listener
 		_offVideoListener()
 	}
-	render() {
-		const opts = {
-		    height: '50px',
-		    width: '100%',
-		    playerVars: { // https://developers.google.com/youtube/player_parameters
-		    	autoplay: 1
-		    }
-		}
-		return (
-			<div id="video-container">
-				{ this.props.live && <YouTube
-					videoId={this.props.videoId}
-					opts={opts}
-					onEnd={this.playListHandler}
-					onReady={this.videoTimeHandler}
-					onStateChange={this.videoStateHandler} 
-				/>}
-			</div>
-		)
-	}
 	playListHandler() {
-		let playList = this.props.playList
-		let messages = this.props.messages
-		if ( playList.length > 1 ) this.props.dispatch(playNext(playList,messages,this.props.videoHost))
+		const playList = this.props.playList
+		const messages = this.props.messages
+		const {videoHost} = this.props
+		console.log('current playlist: ', playList)
+		if ( playList.length > 1 ) {
+			console.log('play next song start')
+			this.props.dispatch(playNext(playList,messages,videoHost))
+			console.log('play next song end')
+		}
 	}
 	videoTimeHandler(event) {
 
@@ -82,6 +65,28 @@ class VideoBoad extends React.Component {
 			case this.props.content.videoId !== data.content.videoId:
 				this.props.dispatch(updateVideoState(data))
 		}
+	}
+	render() {
+		const opts = {
+		    height: '100%',
+		    width: '100%',
+		    playerVars: { // https://developers.google.com/youtube/player_parameters
+		    	autoplay: 1
+		    }
+		}
+		return (
+			<div id="video-container">
+				{ this.props.live && (
+					<YouTube
+						videoId={this.props.videoId}
+						opts={opts}
+						onEnd={this.playListHandler}
+						onReady={this.videoTimeHandler}
+						onStateChange={this.videoStateHandler} 
+					/>
+				)}
+			</div>
+		)
 	}
 }
 

@@ -1,91 +1,95 @@
 
+
+$bg-color: #f7f7f7
 #chat-box-container
-	display: flex
+	display: inline-flex
 	position: relative
 	flex-direction: column
 	align-items: center
-	width: calc(100% - 10px)
+	width: calc(100vw - 20px)
 	// max-width: 800px
 	height: calc(100vh - 45px)
-	padding: 40px 20px 5px 20px
+	padding: 40px 10px 5px 10px
+	// padding: 0 10px
 	background-color: rgba(10,10,10,.9)
 
-#chat-board
-	display: block
-	flex-direction: column
-	width: calc(100%)
-	height: calc(100vh - 60px)
-	padding-bottom: 5px
-	position: relative
-	//border: 1px solid gray
-	align-items: center
-	overflow-x: auto
-	&::-webkit-scrollbar-track
-		border-radius: 1px
-	&::-webkit-scrollbar
-		width: 1px
-		background-color: rgba(200,200,200,0)
-	&::-webkit-scrollbar-thumb
-		border-radius: 1px
-		background-color: rgba(180,180,180,0.2)
-
-	.message-box
-		display: inline-flex
+	#chat-board
+		position: relative
+		display: block
 		flex-direction: column
-		width: 100%
-		max-width: calc(100%)
-		align-items: flex-start
-		margin: 5px 0px 0px 0px
-		min-height: 40px
-
-		*
-			font-size: 1em
-
-		span
-			padding: 10px
-			background-color: white
-			//border-radius: 5px
-			max-width: calc(100%)
-			word-break: break-all
-			color: rgba(100,100,100,1)
-			border-radius: 0 15px 15px 15px
-			box-shadow: 1px 1px 3px rgb(200,200,200)
-
-		span.pokemon-name
-			position: relative
-
-			&:hover:after
-				content: attr(data-msg)
-				position: absolute
-				border-radius: 10px
-				padding: 3px
-				display: flex
-				right: -1px
-				top: 30px
-				font-size: 0.8em
-				background-color: rgba(70,70,70,.8)
-				color: white
-				z-index: 1
-
-	.self-message
-		align-items: flex-end
-		span 
-			max-width: calc(100% - 3px)
-			margin-right: 3px
-			background-color: #96BDBC
-			color: rgb(240,240,240)
-			border-radius: 15px 0 15px 15px
-
-	.system-message
+		width: calc(100%)
+		height: calc(100vh - 60px)
+		// height: calc(100vh - 150px)
+		// max-height: calc(100vh - 150px)
+		//border: 1px solid gray
 		align-items: center
-		span 
-			max-width: calc(100% - 3px)
-			margin-right: 3px
-			color: #969696
-			background-color: transparent
-			border-radius: 0
-			font-size: 0.9em
-			box-shadow: none
+		overflow-x: auto
+		&::-webkit-scrollbar-track
+			border-radius: 1px
+		&::-webkit-scrollbar
+			width: 1px
+			background-color: rgba(200,200,200,0)
+		&::-webkit-scrollbar-thumb
+			border-radius: 1px
+			background-color: rgba(180,180,180,0.2)
+
+		.message-box
+			display: inline-flex
+			flex-direction: column
+			width: 100%
+			max-width: calc(100%)
+			align-items: flex-start
+			margin: 0px 0px 0px 0px
+			min-height: 40px
+
+			*
+				font-size: 1em
+
+			span
+				padding: 5px
+				// background-color: white
+				//border-radius: 5px
+				max-width: calc(100% - 10px)
+				word-break: break-all
+				color: rgba(100,100,100,1)
+				// border-radius: 0 15px 15px 15px
+				// box-shadow: 1px 1px 3px rgb(200,200,200)
+
+			span.pokemon-name
+				position: relative
+
+				&:hover:after
+					content: attr(data-msg)
+					position: absolute
+					border-radius: 10px
+					padding: 3px
+					display: flex
+					right: -1px
+					top: 20px
+					font-size: 0.8em
+					background-color: rgba(70,70,70,.8)
+					color: white
+					z-index: 1
+
+		.self-message
+			align-items: flex-end
+			span 
+				max-width: calc(100% - 3px)
+				margin-right: 3px
+				background-color: #96BDBC
+				color: rgb(240,240,240)
+				border-radius: 15px 0 15px 15px
+
+		.system-message
+			align-items: center
+			span 
+				max-width: calc(100% - 3px)
+				margin-right: 3px
+				color: #969696
+				background-color: transparent
+				border-radius: 0
+				font-size: 0.9em
+				box-shadow: none
 
 #filter-mask
 	display: none
